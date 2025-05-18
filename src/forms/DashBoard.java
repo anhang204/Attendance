@@ -55,7 +55,7 @@ public class DashBoard extends javax.swing.JFrame {
         });
 
         btnViewUser.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnViewUser.setText("View User");
+        btnViewUser.setText("View Employee");
         btnViewUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnViewUserActionPerformed(evt);
@@ -63,7 +63,7 @@ public class DashBoard extends javax.swing.JFrame {
         });
 
         btnUpdateUser.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnUpdateUser.setText("Update User");
+        btnUpdateUser.setText("Update Employee");
         btnUpdateUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUpdateUserActionPerformed(evt);
@@ -71,7 +71,7 @@ public class DashBoard extends javax.swing.JFrame {
         });
 
         btnRegisterUser2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnRegisterUser2.setText("Register User");
+        btnRegisterUser2.setText("Register Employee");
         btnRegisterUser2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegisterUser2ActionPerformed(evt);
@@ -79,7 +79,7 @@ public class DashBoard extends javax.swing.JFrame {
         });
 
         btnDeleteUser.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnDeleteUser.setText("Delete User");
+        btnDeleteUser.setText("Delete Employee");
         btnDeleteUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeleteUserActionPerformed(evt);
@@ -123,17 +123,17 @@ public class DashBoard extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(33, Short.MAX_VALUE)
+                .addContainerGap(21, Short.MAX_VALUE)
                 .addComponent(btnRegisterUser2)
-                .addGap(27, 27, 27)
-                .addComponent(btnViewUser, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
-                .addComponent(btnUpdateUser, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnViewUser)
+                .addGap(17, 17, 17)
+                .addComponent(btnUpdateUser, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnDeleteUser, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addComponent(btnDeleteUser)
+                .addGap(18, 18, 18)
                 .addComponent(btnGenerateQR, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addGap(17, 17, 17)
                 .addComponent(btnViewQR, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnMarkAttendance)
@@ -170,19 +170,19 @@ public class DashBoard extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnRegisterUser2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterUser2ActionPerformed
-        BDUtility.openForm(UserRegistration.class.getSimpleName(), new UserRegistration());
+        BDUtility.openForm(EmployeeRegistration.class.getSimpleName(), new EmployeeRegistration());
     }//GEN-LAST:event_btnRegisterUser2ActionPerformed
 
     private void btnViewUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewUserActionPerformed
-        BDUtility.openForm(ViewUser.class.getSimpleName(), new ViewUser());
+        BDUtility.openForm(ViewEmployee.class.getSimpleName(), new ViewEmployee());
     }//GEN-LAST:event_btnViewUserActionPerformed
 
     private void btnUpdateUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateUserActionPerformed
-        BDUtility.openForm(UpdateUser.class.getSimpleName(), new UpdateUser());
+        BDUtility.openForm(UpdateEmployee.class.getSimpleName(), new UpdateEmployee());
     }//GEN-LAST:event_btnUpdateUserActionPerformed
 
     private void btnDeleteUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteUserActionPerformed
-        BDUtility.openForm(DeleteUser.class.getSimpleName(), new DeleteUser());
+        BDUtility.openForm(DeleteEmployee.class.getSimpleName(), new DeleteEmployee());
     }//GEN-LAST:event_btnDeleteUserActionPerformed
 
     private void btnGenerateQRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerateQRActionPerformed

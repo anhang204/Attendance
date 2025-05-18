@@ -347,9 +347,9 @@ public class MarkAttendance extends javax.swing.JFrame implements Runnable, Thre
        try{
            Connection con = ConnectionProvider.getCon();
            Statement st = con.createStatement();
-           ResultSet rs = st.executeQuery("select * from userdetails where email='" + resultMap.get("email") + "';");
+           ResultSet rs = st.executeQuery("select * from Employee where email='" + resultMap.get("email") + "';");
            if(!rs.next()){
-               showPopUpForCertainDuration("User is not Registered or Deleted", " Invalid QR", JOptionPane.ERROR_MESSAGE);
+               showPopUpForCertainDuration("Employee is not Registered or Deleted", " Invalid QR", JOptionPane.ERROR_MESSAGE);
                return;
            }
            
@@ -445,7 +445,7 @@ public class MarkAttendance extends javax.swing.JFrame implements Runnable, Thre
        LocalDateTime currentDateTime = LocalDateTime.now();
        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
        
-       ResultSet rs = st.executeQuery("select * from userattendance where date ='"+currentDate.format(dateFormatter)+ "' and userid=" + Integer.valueOf(resultMap.get("id"))+ ";");
+       ResultSet rs = st.executeQuery("select * from Attendance where date ='"+currentDate.format(dateFormatter)+ "' and employeeID=" + Integer.valueOf(resultMap.get("id"))+ ";");
        Connection connection = ConnectionProvider.getCon();
        if(rs.next()){
            String checkOutDateTime = rs.getString(4);
@@ -474,7 +474,7 @@ public class MarkAttendance extends javax.swing.JFrame implements Runnable, Thre
                return false;
            }
            
-           String updateQuery = "update userattendance set checkout=?, workduration=? where date=? and userid=?";
+           String updateQuery = "update Attendance set checkout=?, workduration=? where date=? and employeeID=?";
            PreparedStatement preparedStatement = connection.prepareStatement(updateQuery);
            preparedStatement.setString(1, currentDateTime.format(dateTimeFormatter));
            preparedStatement.setString(2, "" + hours + "Hours and" + minutes + " Minutes");
@@ -487,7 +487,7 @@ public class MarkAttendance extends javax.swing.JFrame implements Runnable, Thre
            color = Color.red;
        } else{
            //CheckIn
-           String insertQuery = "INSERT INTO userattendance (userid, date, checkin) VALUES (?,?,?)";
+           String insertQuery = "INSERT INTO Attendance (employeeID, date, checkin) VALUES (?,?,?)";
            PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);
            preparedStatement.setString(1, resultMap.get("id"));
            preparedStatement.setString(2, currentDate.format(dateFormatter));

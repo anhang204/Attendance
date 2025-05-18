@@ -28,14 +28,14 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  *
  * @author 5530
  */
-public class UpdateUser extends javax.swing.JFrame {
+public class UpdateEmployee extends javax.swing.JFrame {
 
     String uniqueReg = null;
     String existingImageName = null;
     BufferedImage originalImage = null;
     File selectedFile = null;
     
-    public UpdateUser() {
+    public UpdateEmployee() {
         initComponents();
         BDUtility.setImage(this, "images/abc1.jpg", 860, 570);
         this.getRootPane().setBorder(BorderFactory.createMatteBorder(4, 4, 4, 4, Color.BLACK));
@@ -74,7 +74,6 @@ public class UpdateUser extends javax.swing.JFrame {
         btnSearch = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(860, 538));
         setMinimumSize(new java.awt.Dimension(860, 538));
         setUndecorated(true);
 
@@ -145,7 +144,7 @@ public class UpdateUser extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("Update User");
+        jLabel1.setText("Update Employee");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Name");
@@ -334,9 +333,9 @@ public class UpdateUser extends javax.swing.JFrame {
                 }
                 
                 String contact = txtContact.getText().toString();
-                String contactRegex= "^\\d(5)$";
+                String contactRegex= "^\\d{10}$";
                 if(!contact.matches(contactRegex)){
-                    JOptionPane.showMessageDialog(null, "Invalid contact nuber.", "Invalid", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Invalid contact number.", "Invalid", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
                 String address = txtAddress.getText().toString();
@@ -351,7 +350,7 @@ public class UpdateUser extends javax.swing.JFrame {
                 Connection connection = ConnectionProvider.getCon();
                 try{
                 Statement st = connection.createStatement();
-                ResultSet rs = st.executeQuery("select* from userDetails where email = '" + email.trim() + "'");
+                ResultSet rs = st.executeQuery("select* from Employee where email = '" + email.trim() + "'");
                 if(!rs.next()){
                    JOptionPane.showMessageDialog(null, "Email not found.", "Not Found", JOptionPane.INFORMATION_MESSAGE);
                    return;
@@ -363,9 +362,9 @@ public class UpdateUser extends javax.swing.JFrame {
                 String imageName = saveImage(email);
                 String updateQuery;
                 if(imageName != null){
-                   updateQuery = "UPDATE userdetails SET name =?, gender=?, contact=?, address=?, state=?, country=?, imagename=? where uniqueregid=?"; 
+                   updateQuery = "UPDATE Employee SET name =?, gender=?, contact=?, address=?, state=?, country=?, imagename=? where uniqueregid=?"; 
                 } else {
-                    updateQuery = "UPDATE userdetails SET name=?, gender=?, contact=?, address=?, state=?, country=?, where uniqueregid=?";
+                    updateQuery = "UPDATE Employee SET name=?, gender=?, contact=?, address=?, state=?, country=? where uniqueregid=?";
                 }
                 
                 PreparedStatement preparedStatement = connection.prepareStatement(updateQuery);
@@ -512,7 +511,7 @@ public class UpdateUser extends javax.swing.JFrame {
            try{
                Connection con = ConnectionProvider.getCon();
                Statement st = con.createStatement();
-               ResultSet rs = st.executeQuery("select * from userdetails where email='"+email+"'");
+               ResultSet rs = st.executeQuery("select * from Employee where email='"+email+"'");
                if(rs.next()){
                   txtName.setText(rs.getString("name"));
                   if(rs.getString("gender").equalsIgnoreCase("Male")){
@@ -569,20 +568,21 @@ public class UpdateUser extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(UpdateUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UpdateEmployee.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(UpdateUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UpdateEmployee.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(UpdateUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UpdateEmployee.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(UpdateUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UpdateEmployee.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UpdateUser().setVisible(true);
+                new UpdateEmployee().setVisible(true);
             }
         });
     }

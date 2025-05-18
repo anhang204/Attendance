@@ -91,7 +91,7 @@ public class GenerateQr extends javax.swing.JFrame {
         );
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("Update User");
+        jLabel1.setText("Generate QR");
 
         userTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -138,8 +138,7 @@ public class GenerateQr extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 831, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 843, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jInternalFrame1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -197,10 +196,10 @@ public class GenerateQr extends javax.swing.JFrame {
         try{
         Connection connection = ConnectionProvider.getCon();
         Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("select * from userdetails");
+        ResultSet resultSet = statement.executeQuery("select * from Employee");
         while (resultSet.next()){
                 model.addRow(new Object[]{
-                    resultSet.getString("ID"),
+                    resultSet.getString("employeeID"),
                     resultSet.getString("name"),
                     resultSet.getString("gender"),
                     resultSet.getString("email"),

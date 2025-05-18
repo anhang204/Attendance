@@ -7,6 +7,8 @@ package utility;
 import java.awt.BorderLayout;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.HashMap;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -65,4 +67,22 @@ public class BDUtility {
         scaledImage.createGraphics().drawImage(originalImage.getScaledInstance(width, height, Image.SCALE_SMOOTH), 0, 0, null);
         return scaledImage;
     }
-} 
+
+    public static Connection getConnection() {
+        try {
+            // Load driver (MySQL)
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            // Kết nối tới database
+            String url = "jdbc:mysql://localhost:3306/ten_database?useSSL=false&serverTimezone=UTC";
+            String user = "your_db_user";
+            String password = "your_db_password";
+
+            return DriverManager.getConnection(url, user, password);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+}

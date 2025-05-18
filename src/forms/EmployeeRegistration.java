@@ -21,12 +21,12 @@ import java.sql.*;
  *
  * @author 5530
  */
-public class UserRegistration extends javax.swing.JFrame {
+public class EmployeeRegistration extends javax.swing.JFrame {
 
     /**
      * Creates new form UserRegistration
      */
-    public UserRegistration() {
+    public EmployeeRegistration() {
         initComponents();
         BDUtility.setImage(this, "images/abc1.jpg", 850, 650);
         this.getRootPane().setBorder(BorderFactory.createMatteBorder(4,4,4,4, Color.BLACK));
@@ -64,7 +64,6 @@ public class UserRegistration extends javax.swing.JFrame {
         btnRegister1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(850, 600));
         setMinimumSize(new java.awt.Dimension(850, 600));
         setUndecorated(true);
 
@@ -77,7 +76,7 @@ public class UserRegistration extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("User Registration");
+        jLabel1.setText("Employee Registration");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Name");
@@ -186,7 +185,7 @@ public class UserRegistration extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(323, 323, 323)
+                .addGap(288, 288, 288)
                 .addComponent(btnExit)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -380,7 +379,7 @@ public class UserRegistration extends javax.swing.JFrame {
            Connection connection = ConnectionProvider.getCon();
            try{
                Statement st = connection.createStatement();
-               ResultSet rs = st.executeQuery("select* from userDetails where email = '" + email.trim() + "'");
+               ResultSet rs = st.executeQuery("select* from Employee where email = '" + email.trim() + "'");
                if(rs.next()){
                    JOptionPane.showMessageDialog(null, "Duplicate email.", "Duplicate", JOptionPane.WARNING_MESSAGE);
                    return;
@@ -390,7 +389,7 @@ public class UserRegistration extends javax.swing.JFrame {
                JOptionPane.showMessageDialog(null, ex);
             }
            String imageName = saveImage(email);
-           String insertQuery = "INSERT into userdetails (name,gender,email,contact,address,state,country,uniqueregid,imagename) VALUES (?,?,?,?,?,?,?,?,?)";
+           String insertQuery = "INSERT into Employee (name,gender,email,contact,address,state,country,uniqueregid,imagename) VALUES (?,?,?,?,?,?,?,?,?)";
            
            PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);
            preparedStatement.setString(1,name);
@@ -482,20 +481,21 @@ public class UserRegistration extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(UserRegistration.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EmployeeRegistration.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(UserRegistration.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EmployeeRegistration.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(UserRegistration.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EmployeeRegistration.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(UserRegistration.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EmployeeRegistration.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UserRegistration().setVisible(true);
+                new EmployeeRegistration().setVisible(true);
             }
         });
     }

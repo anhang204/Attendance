@@ -102,10 +102,25 @@ public class ViewAttendance extends javax.swing.JFrame {
         jScrollPane1.setViewportView(userTable);
 
         dateChooserTo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        dateChooserTo.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                dateChooserToPropertyChange(evt);
+            }
+        });
 
         dateChooserFrom.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        dateChooserFrom.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                dateChooserFromPropertyChange(evt);
+            }
+        });
 
         txtSearch.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchKeyReleased(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("On / From");
@@ -132,18 +147,43 @@ public class ViewAttendance extends javax.swing.JFrame {
 
         checkBoxContact.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         checkBoxContact.setText("Contact");
+        checkBoxContact.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                checkBoxContactItemStateChanged(evt);
+            }
+        });
 
         checkBoxState.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         checkBoxState.setText("State");
+        checkBoxState.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                checkBoxStateItemStateChanged(evt);
+            }
+        });
 
         checkBoxCountry.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         checkBoxCountry.setText("Country");
+        checkBoxCountry.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                checkBoxCountryItemStateChanged(evt);
+            }
+        });
 
         checkBoxAddress.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         checkBoxAddress.setText("Address");
+        checkBoxAddress.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                checkBoxAddressItemStateChanged(evt);
+            }
+        });
 
         checkBoxUniqueRegId.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         checkBoxUniqueRegId.setText("Unique Reg ID");
+        checkBoxUniqueRegId.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                checkBoxUniqueRegIdItemStateChanged(evt);
+            }
+        });
 
         btnResetFilters.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnResetFilters.setText("Reset Filters");
@@ -281,6 +321,38 @@ public class ViewAttendance extends javax.swing.JFrame {
         loadDataInTable();
     }//GEN-LAST:event_formComponentShown
 
+    private void checkBoxContactItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_checkBoxContactItemStateChanged
+        loadDataInTable();
+    }//GEN-LAST:event_checkBoxContactItemStateChanged
+
+    private void checkBoxAddressItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_checkBoxAddressItemStateChanged
+        loadDataInTable();
+    }//GEN-LAST:event_checkBoxAddressItemStateChanged
+
+    private void checkBoxStateItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_checkBoxStateItemStateChanged
+        loadDataInTable();
+    }//GEN-LAST:event_checkBoxStateItemStateChanged
+
+    private void checkBoxCountryItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_checkBoxCountryItemStateChanged
+        loadDataInTable();
+    }//GEN-LAST:event_checkBoxCountryItemStateChanged
+
+    private void checkBoxUniqueRegIdItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_checkBoxUniqueRegIdItemStateChanged
+        loadDataInTable();
+    }//GEN-LAST:event_checkBoxUniqueRegIdItemStateChanged
+
+    private void dateChooserFromPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dateChooserFromPropertyChange
+        loadDataInTable();
+    }//GEN-LAST:event_dateChooserFromPropertyChange
+
+    private void dateChooserToPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dateChooserToPropertyChange
+        loadDataInTable();
+    }//GEN-LAST:event_dateChooserToPropertyChange
+
+    private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
+        loadDataInTable();
+    }//GEN-LAST:event_txtSearchKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -366,7 +438,7 @@ public class ViewAttendance extends javax.swing.JFrame {
         Boolean countryIncluded = checkBoxCountry.isSelected();
         Boolean uniqueRegIdIncluded = checkBoxUniqueRegId.isSelected();
         
-        String sqlQuery = "SELECT ud.id, ud.name,ud.gender, ud.email, ua.date, ua.checkin, ua.checkout, ua.workduration";
+        String sqlQuery = "SELECT ud.employeeID, ud.name,ud.gender, ud.email, ua.date, ua.checkin, ua.checkout, ua.workduration";
         if(contactIncluded){
             columns.add("Contact");
             sqlQuery += ", ud.contact";
@@ -389,7 +461,7 @@ public class ViewAttendance extends javax.swing.JFrame {
             sqlQuery += ", ud.uniqueregid";
         }
         
-        sqlQuery += " FROM userdetails AS ud INNER JOIN userattendance AS ua ON ud.id = ua.userid ";
+        sqlQuery += " FROM Employee AS ud INNER JOIN Attendance AS ua ON ud.employeeID = ua.EmployeeID ";
         if(searchText != null){
             sqlQuery += "where (ud.name like '%" + searchText + "%' or ud.email like '%" + searchText + "%') ";
             if(fromDate != null && toDate != null){
@@ -418,7 +490,7 @@ public class ViewAttendance extends javax.swing.JFrame {
             Set<String> emailList = new HashSet<>();
             while (rs.next()){
                 List<Object> row = new ArrayList<>();
-                row.add(rs.getString("id"));
+                row.add(rs.getString("employeeID"));
                 row.add(rs.getString("name"));
                 row.add(rs.getString("gender"));
                 row.add(rs.getString("email"));

@@ -8,6 +8,7 @@ import utility.BDUtility;
 
 import javax.swing.*;
 import java.awt.*;
+import java.sql.*;
 
 /**
  *
@@ -150,10 +151,11 @@ public class Login extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_btnExitActionPerformed
 
+
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
     String email = txtEmail.getText().toString();
     String password = new String(txtPassword.getPassword());
-    if("cuclihaydoi".equalsIgnoreCase(email)&&"cuclihaydoi".equalsIgnoreCase(password)){
+    if("admin@gmail.com".equalsIgnoreCase(email)&&"12345".equalsIgnoreCase(password)){
         this.dispose();
         BDUtility.openForm(DashBoard.class.getSimpleName(),new DashBoard());
     } else {

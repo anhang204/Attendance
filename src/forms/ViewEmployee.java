@@ -24,12 +24,12 @@ import utility.BDUtility;
  *
  * @author 5530
  */
-public class ViewUser extends javax.swing.JFrame {
+public class ViewEmployee extends javax.swing.JFrame {
 
     /**
      * Creates new form ViewUser
      */
-    public ViewUser() {
+    public ViewEmployee() {
         initComponents();
         BDUtility.setImage(this, "images/abc1.jpg", 1224, 544);
         this.getRootPane().setBorder(BorderFactory.createMatteBorder(4,4,4,4, Color.black));
@@ -54,7 +54,6 @@ public class ViewUser extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1223, 476));
         setMinimumSize(new java.awt.Dimension(1223, 476));
         setUndecorated(true);
         addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -64,7 +63,7 @@ public class ViewUser extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("ViewUser");
+        jLabel1.setText("View Employee");
 
         btnExit.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnExit.setText("x");
@@ -115,6 +114,11 @@ public class ViewUser extends javax.swing.JFrame {
         jScrollPane1.setViewportView(userTable);
 
         txtSearch.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSearchActionPerformed(evt);
+            }
+        });
         txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtSearchKeyReleased(evt);
@@ -225,6 +229,10 @@ public class ViewUser extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_userTableMouseClicked
+
+    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSearchActionPerformed
     
     private void fetchUser (String searchText) throws Exception {
         DefaultTableModel model = (DefaultTableModel) userTable.getModel();
@@ -234,15 +242,15 @@ public class ViewUser extends javax.swing.JFrame {
             Statement st = con.createStatement();
             String query = null;
             if(Objects.isNull(searchText)){
-                query = "select * from userdetails";
+                query = "select * from Employee";
             }else{
-                query = "select * from userdetails where name like '%" + searchText +"%' or email like '%" + searchText + "%'";
+                query = "select * from Employee where name like '%" + searchText +"%' or email like '%" + searchText + "%'";
             }
             
             ResultSet rs = st.executeQuery(query);
             while (rs.next()){
                 model.addRow(new Object[]{
-                    rs.getString("ID"),
+                    rs.getString("employeeID"),
                     rs.getString("name"),
                     rs.getString("gender"),
                     rs.getString("email"),
@@ -277,20 +285,21 @@ public class ViewUser extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViewUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewEmployee.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViewUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewEmployee.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViewUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewEmployee.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ViewUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewEmployee.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ViewUser().setVisible(true);
+                new ViewEmployee().setVisible(true);
             }
         });
     }

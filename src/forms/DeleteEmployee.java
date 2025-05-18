@@ -22,12 +22,12 @@ import utility.BDUtility;
  *
  * @author 5530
  */
-public class DeleteUser extends javax.swing.JFrame {
+public class DeleteEmployee extends javax.swing.JFrame {
 
     /**
      * Creates new form DeleteUser
      */
-    public DeleteUser() {
+    public DeleteEmployee() {
         initComponents();
         BDUtility.setImage(this, "images/abc1.jpg", 1090, 520);
         this.getRootPane().setBorder(BorderFactory.createMatteBorder(4, 4, 4, 4, Color.BLACK));
@@ -59,7 +59,7 @@ public class DeleteUser extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("Delete User");
+        jLabel1.setText("Delete Employee");
 
         userTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -108,7 +108,7 @@ public class DeleteUser extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 495, Short.MAX_VALUE)
+                        .addGap(0, 448, Short.MAX_VALUE)
                         .addComponent(jLabel1)
                         .addGap(434, 434, 434)
                         .addComponent(btnExit))
@@ -151,7 +151,7 @@ public class DeleteUser extends javax.swing.JFrame {
         try {
             fetchUser(null);
         } catch (Exception ex) {
-            Logger.getLogger(DeleteUser.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DeleteEmployee.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_formComponentShown
 
@@ -169,13 +169,13 @@ public class DeleteUser extends javax.swing.JFrame {
             deleteFile(imagePath);
 
             Connection connection = ConnectionProvider.getCon();
-            String attendanceDeleteQuery = "DELETE userattendance, userdetails FROM userdetails LEFT JOIN userattendance ON userattendance.userid=userdetails.id where userdetails.email=?";
+            String attendanceDeleteQuery = "DELETE Attendance, Employee FROM Employee LEFT JOIN Attendance ON Attendance.employeeID=Employee.employeeID where Employee.email=?";
 
             PreparedStatement preparedStatement = connection.prepareStatement(attendanceDeleteQuery);
             preparedStatement.setString(1,email);
             preparedStatement.executeUpdate();
             fetchUser(null);
-            JOptionPane.showMessageDialog(null, "User deletes Successfully.", "Confimation", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Employee deletes Successfully.", "Confimation", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(null, "Deletion Canceled.", "Confirmation", JOptionPane.INFORMATION_MESSAGE);
         };
@@ -195,15 +195,15 @@ public class DeleteUser extends javax.swing.JFrame {
             Statement st = con.createStatement();
             String query = null;
             if(Objects.isNull(searchText)){
-                query = "select * from userdetails";
+                query = "select * from Employee";
             }else{
-                query = "select * from userdetails where name like '%" + searchText +"%' or email like '%" + searchText + "%'";
+                query = "select * from Employee where name like '%" + searchText +"%' or email like '%" + searchText + "%'";
             }
             
             ResultSet rs = st.executeQuery(query);
             while (rs.next()){
                 model.addRow(new Object[]{
-                    rs.getString("ID"),
+                    rs.getString("employeeID"),
                     rs.getString("name"),
                     rs.getString("gender"),
                     rs.getString("email"),
@@ -249,20 +249,21 @@ public class DeleteUser extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DeleteUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DeleteEmployee.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DeleteUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DeleteEmployee.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DeleteUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DeleteEmployee.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DeleteUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DeleteEmployee.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DeleteUser().setVisible(true);
+                new DeleteEmployee().setVisible(true);
             }
         });
     }
